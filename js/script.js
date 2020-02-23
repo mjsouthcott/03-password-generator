@@ -2,7 +2,7 @@
 let generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
-    // Define variables, using arrays to contain all possible characters of each type
+    // Define variables, using arrays to store all possible characters of each type
     let lowerCaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     console.log("lowerCaseChars: " + lowerCaseChars)
     let upperCaseChars = []
@@ -16,6 +16,7 @@ function generatePassword() {
     console.log("specChars: " + specChars)
     let passwordLength, useLowerCaseChars, useUpperCaseChars, useNumericChars, useSpecChars, password
     let charBank = []
+    let attempt = 1
 
     // Prompt user for password length, ensuring it's between 8 and 128
     while (true) {
@@ -39,7 +40,7 @@ function generatePassword() {
         useSpecChars = confirm("Would you like the password to contain special characters?")
         console.log("useSpecChars: " + useSpecChars)
         if (useLowerCaseChars === false && useUpperCaseChars === false && useNumericChars === false && useSpecChars === false) {
-            alert("At least one one character type must be selected. Please try again.")
+            alert("You must select at least one character type. Please try again.")
         } else {
             break
         }
@@ -62,6 +63,9 @@ function generatePassword() {
 
     // Generate passwords until criteria are met
     while (true) {
+        console.log("Attempt: " + attempt)
+
+        // Define local variables
         password = ""
         let containsLowerCaseChar, containsUpperCaseChar, containsNumericChar, containsSpecChar = false
         let passwordGood = true
@@ -114,9 +118,10 @@ function generatePassword() {
             }
         }
 
-        // If not, start over
+        // If not, increment attempt and start over
         if ((useLowerCaseChars && !containsLowerCaseChar) || (useUpperCaseChars && !containsUpperCaseChar) || (useNumericChars && !containsNumericChar) || (useSpecChars && !containsSpecChar)) {
             passwordGood = false
+            attempt++
         }
 
         // Otherwise, break out of infinite while loop
@@ -126,9 +131,10 @@ function generatePassword() {
         }
     }
 
-    // Password is good; return it to calling expression
+    // Password is good; return it to the calling statement
     return password
 }
+
 // Write password to the #password input
 function writePassword() {
     let password = generatePassword();
