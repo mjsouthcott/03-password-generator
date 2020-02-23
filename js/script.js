@@ -123,10 +123,10 @@ function generatePassword() {
             passwordGood = false
             attempt++
         }
+        console.log("passwordGood: " + passwordGood)
 
         // Otherwise, break out of infinite while loop
         if (passwordGood) {
-            console.log("passwordGood: " + passwordGood)
             break
         }
     }
