@@ -2,7 +2,7 @@
 
 ## Description
 
-This website uses JavaScript to generate random passwords. The user can select the password length (between 8 and 128 characters) and the types of characters it will contain (lower and upper case, numeric and special characters). It ensures that the generated password contains at least 1 of each of the selected character types. It meets all of the acceptance criteria specified by the customer.
+This website uses JavaScript to generate random passwords. The user can specify the password length (between 8 and 128 characters) and select the types of characters the password will contain (lowercase and uppercase letters, numbers and special characters). It ensures that the password contains at least 1 of each of the selected character types. It meets all of the acceptance criteria specified by the customer.
 
 ## Installation
 
