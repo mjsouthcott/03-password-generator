@@ -2,6 +2,7 @@
 let generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
+    // Define variables, using arrays to contain all possible characters of each type
     let lowerCaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     console.log("lowerCaseChars: " + lowerCaseChars)
     let upperCaseChars = []
@@ -13,10 +14,10 @@ function generatePassword() {
     console.log("numericChars: " + numericChars)
     let specChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":", ",", "(", ")", "{", "}", "[", "]", "~", "-", "_", "."]
     console.log("specChars: " + specChars)
-    let useLowerCaseChars, useUpperCaseChars, useNumericChars, useSpecChars, password
+    let passwordLength, useLowerCaseChars, useUpperCaseChars, useNumericChars, useSpecChars, password
     let charBank = []
 
-    let passwordLength
+    // Prompt user for password length, ensuring it's between 8 and 128
     while (true) {
         passwordLength = parseInt(prompt("Please specify a password length between 8 and 128 characters."))
         if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
@@ -27,6 +28,7 @@ function generatePassword() {
     }
     console.log("passwordLength: " + passwordLength)
 
+    // Prompt user for character types to be included, ensuring at least 1 is selected
     while (true) {
         useLowerCaseChars = confirm("Would you like the password to include lower case characters?")
         console.log("useLowerCaseChars: " + useLowerCaseChars)
@@ -43,6 +45,7 @@ function generatePassword() {
         }
     }
 
+    // Create array for generator to randomly select from
     if (useLowerCaseChars) {
         charBank.push(...lowerCaseChars)
     }
@@ -57,16 +60,19 @@ function generatePassword() {
     }
     console.log(charBank)
 
+    // Generate passwords until criteria are met
     while (true) {
         password = ""
         let containsLowerCaseChar, containsUpperCaseChar, containsNumericChar, containsSpecChar = false
         let passwordGood = true
 
+        // Generate password
         for (i = 0; i < passwordLength; i++) {
             password += charBank[Math.floor(Math.random() * charBank.length) + 1]
         }
         console.log("password: " + password)
 
+        // Check if password contains at least 1 of each character type specified by user
         if (useLowerCaseChars) {
             for (i = 0; i < lowerCaseChars.length; i++) {
                 console.log("Checking: " + lowerCaseChars[i])
@@ -108,25 +114,26 @@ function generatePassword() {
             }
         }
 
+        // If not, start over
         if ((useLowerCaseChars && !containsLowerCaseChar) || (useUpperCaseChars && !containsUpperCaseChar) || (useNumericChars && !containsNumericChar) || (useSpecChars && !containsSpecChar)) {
             passwordGood = false
         }
 
+        // Otherwise, break out of infinite while loop
         if (passwordGood) {
             console.log("passwordGood: " + passwordGood)
             break
         }
     }
 
+    // Password is good; return it to calling expression
     return password
 }
 // Write password to the #password input
 function writePassword() {
     let password = generatePassword();
     let passwordText = document.querySelector("#password");
-
     passwordText.value = password;
-
 }
 
 // Add event listener to generate button
