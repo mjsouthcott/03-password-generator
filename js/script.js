@@ -2,19 +2,19 @@
 let generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
-    // Define variables, using arrays to store all possible characters of each type
-    let lowerCaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    console.log("lowerCaseChars: " + lowerCaseChars)
-    let upperCaseChars = []
-    for (i = 0; i < lowerCaseChars.length; i++) {
-        upperCaseChars.push(lowerCaseChars[i].toUpperCase())
+    // Declare and initialize some variables, using arrays to store all possible characters of each type
+    let lowercaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    console.log("lowercaseChars: " + lowercaseChars)
+    let uppercaseChars = []
+    for (i = 0; i < lowercaseChars.length; i++) {
+        uppercaseChars.push(lowercaseChars[i].toUpperCase())
     }
-    console.log("upperCaseChars: " + upperCaseChars)
+    console.log("uppercaseChars: " + uppercaseChars)
     let numericChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     console.log("numericChars: " + numericChars)
     let specChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":", ",", "(", ")", "{", "}", "[", "]", "~", "-", "_", "."]
     console.log("specChars: " + specChars)
-    let passwordLength, useLowerCaseChars, useUpperCaseChars, useNumericChars, useSpecChars, password
+    let passwordLength, useLowercaseChars, useUppercaseChars, useNumericChars, useSpecChars, password
     let charBank = []
     let attempt = 1
 
@@ -31,15 +31,15 @@ function generatePassword() {
 
     // Prompt user for character types to be included, ensuring at least 1 is selected
     while (true) {
-        useLowerCaseChars = confirm("Would you like the password to include lower case characters?")
-        console.log("useLowerCaseChars: " + useLowerCaseChars)
-        useUpperCaseChars = confirm("Would you like the password to include upper case characters?")
-        console.log("useUpperCaseChars: " + useUpperCaseChars)
+        useLowercaseChars = confirm("Would you like the password to include lowercase characters?")
+        console.log("useLowercaseChars: " + useLowercaseChars)
+        useUppercaseChars = confirm("Would you like the password to include uppercase characters?")
+        console.log("useUppercaseChars: " + useUppercaseChars)
         useNumericChars = confirm("Would you like the password to contain numeric characters?")
         console.log("useNumericChars: " + useNumericChars)
         useSpecChars = confirm("Would you like the password to contain special characters?")
         console.log("useSpecChars: " + useSpecChars)
-        if (useLowerCaseChars === false && useUpperCaseChars === false && useNumericChars === false && useSpecChars === false) {
+        if (useLowercaseChars === false && useUppercaseChars === false && useNumericChars === false && useSpecChars === false) {
             alert("You must select at least one character type. Please try again.")
         } else {
             break
@@ -47,11 +47,11 @@ function generatePassword() {
     }
 
     // Create array for generator to randomly select from
-    if (useLowerCaseChars) {
-        charBank.push(...lowerCaseChars)
+    if (useLowercaseChars) {
+        charBank.push(...lowercaseChars)
     }
-    if (useUpperCaseChars) {
-        charBank.push(...upperCaseChars)
+    if (useUppercaseChars) {
+        charBank.push(...uppercaseChars)
     }
     if (useNumericChars) {
         charBank.push(...numericChars)
@@ -67,7 +67,7 @@ function generatePassword() {
 
         // Define local variables
         password = ""
-        let containsLowerCaseChar, containsUpperCaseChar, containsNumericChar, containsSpecChar = false
+        let containsLowercaseChar, containsUppercaseChar, containsNumericChar, containsSpecChar = false
         let passwordGood = true
 
         // Generate password
@@ -77,22 +77,22 @@ function generatePassword() {
         console.log("password: " + password)
 
         // Check if password contains at least 1 of each character type specified by user
-        if (useLowerCaseChars) {
-            for (i = 0; i < lowerCaseChars.length; i++) {
-                console.log("Checking: " + lowerCaseChars[i])
-                containsLowerCaseChar = password.includes(lowerCaseChars[i])
-                console.log("containsLowerCaseChar: " + containsLowerCaseChar)
-                if (containsLowerCaseChar) {
+        if (useLowercaseChars) {
+            for (i = 0; i < lowercaseChars.length; i++) {
+                console.log("Checking: " + lowercaseChars[i])
+                containsLowercaseChar = password.includes(lowercaseChars[i])
+                console.log("containsLowercaseChar: " + containsLowercaseChar)
+                if (containsLowercaseChar) {
                     break
                 }
             }
         }
-        if (useUpperCaseChars) {
-            for (i = 0; i < upperCaseChars.length; i++) {
-                console.log("Checking: " + upperCaseChars[i])
-                containsUpperCaseChar = password.includes(upperCaseChars[i])
-                console.log("containsUpperCaseChar: " + containsUpperCaseChar)
-                if (containsUpperCaseChar) {
+        if (useUppercaseChars) {
+            for (i = 0; i < uppercaseChars.length; i++) {
+                console.log("Checking: " + uppercaseChars[i])
+                containsUppercaseChar = password.includes(uppercaseChars[i])
+                console.log("containsUppercaseChar: " + containsUppercaseChar)
+                if (containsUppercaseChar) {
                     break
                 }
             }
@@ -119,7 +119,7 @@ function generatePassword() {
         }
 
         // If not, increment attempt and start over
-        if ((useLowerCaseChars && !containsLowerCaseChar) || (useUpperCaseChars && !containsUpperCaseChar) || (useNumericChars && !containsNumericChar) || (useSpecChars && !containsSpecChar)) {
+        if ((useLowercaseChars && !containsLowercaseChar) || (useUppercaseChars && !containsUppercaseChar) || (useNumericChars && !containsNumericChar) || (useSpecChars && !containsSpecChar)) {
             passwordGood = false
             attempt++
         }
