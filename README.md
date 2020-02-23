@@ -6,7 +6,7 @@ This website uses JavaScript to generate random passwords. The user can select t
 
 ## Installation
 
-Click on the following URL to view the website in your browser: 
+Click on the following URL to view the website in your browser: [https://mjsouthcott.github.io/03-password-generator/] (https://mjsouthcott.github.io/03-password-generator/).
 
 
 ## Credits
