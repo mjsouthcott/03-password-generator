@@ -2,137 +2,83 @@
 let generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
-    // Declare and initialize some variables, using arrays to store all possible characters of each type
-    let lowercaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    console.log("lowercaseChars: " + lowercaseChars)
-    let uppercaseChars = []
-    for (i = 0; i < lowercaseChars.length; i++) {
-        uppercaseChars.push(lowercaseChars[i].toUpperCase())
-    }
-    console.log("uppercaseChars: " + uppercaseChars)
-    let numericChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    console.log("numericChars: " + numericChars)
-    let specChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":", ",", "(", ")", "{", "}", "[", "]", "~", "-", "_", "."]
-    console.log("specChars: " + specChars)
-    let passwordLength, useLowercaseChars, useUppercaseChars, useNumericChars, useSpecChars, password
+    // Declare and initialize variables
+    let lowercaseChars = {}
+    lowercaseChars.list = "abcdefghijklmnopqrstuvwxyz"
+    console.log("lowercaseChars.list: " + lowercaseChars.list)
+    let uppercaseChars = {}
+    uppercaseChars.list = lowercaseChars.list.toUpperCase()
+    console.log("uppercaseChars.list: " + uppercaseChars.list)
+    let numericChars = {}
+    numericChars.list = "0123456789"
+    console.log("numericChars.list: " + numericChars.list)
+    let specialChars = {}
+    specialChars.list = "@%+\\/'!#$^?:,(){}[]~-_."
+    console.log("specialChars.list: " + specialChars.list)
+    let passwordLength, randomIndex, temporaryValue
+    let unshuffledPassword = ""
     let charBank = []
-    let attempt = 1
+    let shuffledPassword = []
 
     // Prompt user for password length, ensuring it's between 8 and 128
-    while (true) {
+    do {
         passwordLength = parseInt(prompt("Please specify a password length between 8 and 128 characters."))
-        if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
-            alert("Invalid length. Please try again.")
-        } else {
-            break
-        }
-    }
+    } while (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength))
     console.log("passwordLength: " + passwordLength)
 
     // Prompt user for character types to be included, ensuring at least 1 is selected
-    while (true) {
-        useLowercaseChars = confirm("Would you like the password to include lowercase characters?")
-        console.log("useLowercaseChars: " + useLowercaseChars)
-        useUppercaseChars = confirm("Would you like the password to include uppercase characters?")
-        console.log("useUppercaseChars: " + useUppercaseChars)
-        useNumericChars = confirm("Would you like the password to contain numeric characters?")
-        console.log("useNumericChars: " + useNumericChars)
-        useSpecChars = confirm("Would you like the password to contain special characters?")
-        console.log("useSpecChars: " + useSpecChars)
-        if (useLowercaseChars === false && useUppercaseChars === false && useNumericChars === false && useSpecChars === false) {
-            alert("You must select at least one character type. Please try again.")
-        } else {
-            break
-        }
+    do {
+        alert("Please select at least 1 of the following 4 character types.")
+        lowercaseChars.select = confirm("Would you like the password to include lowercase characters?")
+        console.log("lowercaseChars.select: " + lowercaseChars.select)
+        uppercaseChars.select = confirm("Would you like the password to contain uppercase characters?")
+        console.log("uppercaseChars.select: " + uppercaseChars.select)
+        numericChars.select = confirm("Would you like the password to contain numeric characters?")
+        console.log("numericChars.select: " + numericChars.select)
+        specialChars.select = confirm("Would you like the password to contain special characters?")
+        console.log("specialChars.select: " + specialChars.select)
+    } while (lowercaseChars.select === false && uppercaseChars.select === false && numericChars.select === false && specialChars.select === false)
+
+    // Create bank to select characters from, and begin constructing password with 1 character of each selected type
+    if (lowercaseChars.select) {
+        charBank += lowercaseChars.list
+        unshuffledPassword += lowercaseChars.list[Math.floor(Math.random() * lowercaseChars.list.length)]
     }
-
-    // Create array for generator to randomly select from
-    if (useLowercaseChars) {
-        charBank.push(...lowercaseChars)
+    if (uppercaseChars.select) {
+        charBank += uppercaseChars.list
+        unshuffledPassword += uppercaseChars.list[Math.floor(Math.random() * uppercaseChars.list.length)]
     }
-    if (useUppercaseChars) {
-        charBank.push(...uppercaseChars)
+    if (numericChars.select) {
+        charBank += numericChars.list
+        unshuffledPassword += numericChars.list[Math.floor(Math.random() * numericChars.list.length)]
     }
-    if (useNumericChars) {
-        charBank.push(...numericChars)
+    if (specialChars.select) {
+        charBank += specialChars.list
+        unshuffledPassword += specialChars.list[Math.floor(Math.random() * specialChars.list.length)]
     }
-    if (useSpecChars) {
-        charBank.push(...specChars)
+    console.log("charBank: " + charBank)
+    console.log("unshuffledPassword: " + unshuffledPassword)
+
+    // Finish constructing password
+    for (i = unshuffledPassword.length; i < passwordLength; i++) {
+        unshuffledPassword += charBank[Math.floor(Math.random() * charBank.length)]
     }
-    console.log(charBank)
+    console.log("unshuffledPassword: " + unshuffledPassword)
 
-    // Generate passwords until criteria are met
-    while (true) {
-        console.log("Attempt: " + attempt)
-
-        // Define local variables
-        password = ""
-        let containsLowercaseChar, containsUppercaseChar, containsNumericChar, containsSpecChar = false
-        let passwordGood = true
-
-        // Generate password
-        for (i = 0; i < passwordLength; i++) {
-            password += charBank[Math.floor(Math.random() * charBank.length) + 1]
-        }
-        console.log("password: " + password)
-
-        // Check if password contains at least 1 of each character type specified by user
-        if (useLowercaseChars) {
-            for (i = 0; i < lowercaseChars.length; i++) {
-                console.log("Checking: " + lowercaseChars[i])
-                containsLowercaseChar = password.includes(lowercaseChars[i])
-                console.log("containsLowercaseChar: " + containsLowercaseChar)
-                if (containsLowercaseChar) {
-                    break
-                }
-            }
-        }
-        if (useUppercaseChars) {
-            for (i = 0; i < uppercaseChars.length; i++) {
-                console.log("Checking: " + uppercaseChars[i])
-                containsUppercaseChar = password.includes(uppercaseChars[i])
-                console.log("containsUppercaseChar: " + containsUppercaseChar)
-                if (containsUppercaseChar) {
-                    break
-                }
-            }
-        }
-        if (useNumericChars) {
-            for (i = 0; i < numericChars.length; i++) {
-                console.log("Checking: " + numericChars[i])
-                containsNumericChar = password.includes(numericChars[i])
-                console.log("containsNumericChar: " + containsNumericChar)
-                if (containsNumericChar) {
-                    break
-                }
-            }
-        }
-        if (useSpecChars) {
-            for (i = 0; i < specChars.length; i++) {
-                console.log("Checking: " + specChars[i])
-                containsSpecChar = password.includes(specChars[i])
-                console.log("containsSpecChar: " + containsSpecChar)
-                if (containsSpecChar) {
-                    break
-                }
-            }
-        }
-
-        // If not, increment attempt and start over
-        if ((useLowercaseChars && !containsLowercaseChar) || (useUppercaseChars && !containsUppercaseChar) || (useNumericChars && !containsNumericChar) || (useSpecChars && !containsSpecChar)) {
-            passwordGood = false
-            attempt++
-        }
-        console.log("passwordGood: " + passwordGood)
-
-        // Otherwise, break out of infinite while loop
-        if (passwordGood) {
-            break
-        }
+    // Shuffle password to ensure randomness
+    shuffledPassword = unshuffledPassword.split("")
+    let currentIndex = passwordLength
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+        temporaryValue = shuffledPassword[currentIndex]
+        shuffledPassword[currentIndex] = shuffledPassword[randomIndex]
+        shuffledPassword[randomIndex] = temporaryValue
     }
+    console.log("shuffledPassword: " + shuffledPassword.join(""))
 
-    // Password is good; return it to the calling statement
-    return password
+    // Return shuffled password
+    return shuffledPassword.join("")
 }
 
 // Write password to the #password input
