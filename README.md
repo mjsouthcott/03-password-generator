@@ -8,6 +8,15 @@ This website uses JavaScript to generate random passwords. The user can specify 
 
 Click on the following URL to view the website in your browser: [https://mjsouthcott.github.io/03-password-generator/](https://mjsouthcott.github.io/03-password-generator/).
 
+## Usage
+
+1.  Start by clicking on the "Generate Password" button.
+
+2.  When prompted, enter a number between 8 and 128 into the text field and click "OK".
+
+3.  Next, select the character types that the password will contain (click "OK" for yes or "Cancel" for no).
+
+4.  Your secure password will not appear in the text field in the center of the page. Select and copy it to use it elsewhere.
 
 ## Credits
 
