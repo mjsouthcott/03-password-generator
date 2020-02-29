@@ -2,7 +2,7 @@
 
 ## Description
 
-This website uses JavaScript to generate random passwords. The user can specify the password length (between 8 and 128 characters) and select the types of characters the password will contain (lowercase and uppercase letters, numbers and special characters). It meets all of the acceptance criteria specified by the customer, such as ensuring that the password contains at least 1 of each of the selected character types.
+This website uses JavaScript to generate random passwords. The user can specify the password length (between 8 and 128 characters) and select the types of characters that the password will contain (lowercase and uppercase letters, numbers and special characters). It meets all of the acceptance criteria specified by the customer, such as ensuring that the password contains at least 1 of each of the selected character types.
 
 ## Installation
 
@@ -12,11 +12,11 @@ Click on the following URL to view the website in your browser: [https://mjsouth
 
 1.  Start by clicking on the "Generate Password" button.
 
-2.  When prompted, enter a number between 8 and 128 into the text field and click "OK".
+2.  When prompted, enter a password length between 8 and 128 characters into the text field and click "OK".
 
-3.  Next, select the character types that the password will contain (click "OK" for yes or "Cancel" for no).
+3.  Next, select the types of characters that the password will contain (click "OK" for yes or "Cancel" for no).
 
-4.  Your secure password will not appear in the text field in the center of the page. Select and copy it to use it elsewhere.
+4.  Your secure password will now appear in the text field in the center of the page. Select and copy it to use it elsewhere.
 
 ## Credits
 
