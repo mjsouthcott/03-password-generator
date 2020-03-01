@@ -12,19 +12,19 @@ Click on the following URL to view the website in your browser: [https://mjsouth
 
 1.  Start by clicking on the "Generate Password" button.
 
-![Step 1](images/image1.jpg)
+![Step 1](https://github.com/mjsouthcott/03-password-generator/blob/master/images/image1.JPG)
 
 2.  When prompted, enter a password length between 8 and 128 characters into the text field and click "OK".
 
-![Step 2](images/image2.jpg)
+![Step 2](https://github.com/mjsouthcott/03-password-generator/blob/master/images/image2.JPG)
 
 3.  Next, select the types of characters that the password will contain (click "OK" for yes or "Cancel" for no).
 
-![Step 3](images/image3.jpg)
+![Step 3](https://github.com/mjsouthcott/03-password-generator/blob/master/images/image3.JPG)
 
 4.  Your secure password will now appear in the text field in the center of the page. Select and copy it to use it elsewhere.
 
-![Step 4](images/image4.jpg)
+![Step 4](https://github.com/mjsouthcott/03-password-generator/blob/master/images/image4.JPG)
 
 ## Credits
 
